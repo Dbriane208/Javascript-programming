@@ -8,12 +8,14 @@ function longestCommonPrefix(strs) {
     for (let i = 1; i < strs.length; i++) {
         while(strs[i].indexOf(prefix) !== 0) {
             prefix = prefix.substring(0,prefix.length - 1);
-            if (!prefix) return '"" ';
+            if (!prefix) return '';
         }
     }
 
     return prefix;
 }
+
+module.exports = longestCommonPrefix;
 
 console.log(longestCommonPrefix(["flower","flow","flight"])); 
 console.log(longestCommonPrefix(["dog","racecar","car"])); 

@@ -1,6 +1,6 @@
 // Write a function to count how many distinct palindromes are in a given string. A palindrome is considered distinct based on its start and end position in the string.
 
-function countPalindromesInString(s) {
+function countPalindromes(s) {
     let subStrings = [];
 
     for (let i = 0; i < s.length; i++) {
@@ -14,8 +14,10 @@ function countPalindromesInString(s) {
     return subStrings.length;
 }
 
-console.log(countPalindromesInString("ababa"));
-console.log(countPalindromesInString("racecar"));
-console.log(countPalindromesInString("aabb"));
-console.log(countPalindromesInString("a"));
-console.log(countPalindromesInString("abc"));
+module.exports = countPalindromes;
+
+console.log(countPalindromes("ababa"));
+console.log(countPalindromes("racecar"));
+console.log(countPalindromes("aabb"));
+console.log(countPalindromes("a"));
+console.log(countPalindromes("abc"));

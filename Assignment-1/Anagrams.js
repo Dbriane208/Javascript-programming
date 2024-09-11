@@ -14,3 +14,4 @@ function areAnagrams(str1,str2){
 console.log(areAnagrams("listen","silent"))
 console.log(areAnagrams("Hello","world"))
 
+module.exports = areAnagrams;

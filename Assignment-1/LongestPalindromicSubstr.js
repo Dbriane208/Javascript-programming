@@ -30,6 +30,7 @@ var longestPalindrome = function(s) {
     return s.substring(start, end + 1);    
 };
 
+module.exports = longestPalindrome;
 
 console.log(longestPalindrome("babad"));
 console.log(longestPalindrome("cbbd"));

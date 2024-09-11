@@ -12,6 +12,8 @@ function removeDuplicate(str) {
     return result
 }
 
+module.exports = removeDuplicate;
+
 console.log(removeDuplicate("programming"))
 console.log(removeDuplicate("aaaaa"))
 console.log(removeDuplicate("abcd"))

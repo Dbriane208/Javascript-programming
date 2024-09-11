@@ -14,6 +14,8 @@ function isPalindrome(str){
     }
 }
 
+module.exports = isPalindrome;
+
 
 console.log(isPalindrome("A man, a plan, a canal, Panama"))
 console.log(isPalindrome("Was it a car or a cat I saw?"))

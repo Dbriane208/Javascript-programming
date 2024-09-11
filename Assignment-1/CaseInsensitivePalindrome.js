@@ -12,6 +12,8 @@ function isCaseInsensitivePalindrome(str){
     }
 }
 
+module.exports = isCaseInsensitivePalindrome;
+
 console.log(isCaseInsensitivePalindrome("Aba"));
 console.log(isCaseInsensitivePalindrome("Racecar"));
 console.log(isCaseInsensitivePalindrome("Palindrome"));
