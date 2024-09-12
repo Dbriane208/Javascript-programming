@@ -1,0 +1,124 @@
+{
+  "products": [
+    {
+      "id": "001",
+      "name": "Wireless Mouse",
+      "description": "A high-precision wireless mouse with adjustable DPI settings.",
+      "price": 29.99,
+      "category": "Electronics",
+      "stock": 150
+    },
+    {
+      "id": "002",
+      "name": "Bluetooth Headphones",
+      "description": "Over-ear Bluetooth headphones with noise cancellation.",
+      "price": 89.99,
+      "category": "Electronics",
+      "stock": 75
+    },
+    {
+      "id": "003",
+      "name": "Ergonomic Office Chair",
+      "description": "An ergonomic office chair with adjustable height and lumbar support.",
+      "price": 199.99,
+      "category": "Furniture",
+      "stock": 20
+    },
+    {
+      "id": "004",
+      "name": "Yoga Mat",
+      "description": "A non-slip yoga mat with extra cushioning for comfort.",
+      "price": 24.99,
+      "category": "Fitness",
+      "stock": 100
+    },
+    {
+      "id": "005",
+      "name": "Stainless Steel Water Bottle",
+      "description": "A durable stainless steel water bottle with a leak-proof cap.",
+      "price": 15.99,
+      "category": "Home & Kitchen",
+      "stock": 200
+    },
+    {
+      "id": "006",
+      "name": "Gaming Keyboard",
+      "description": "Mechanical keyboard with customizable RGB lighting.",
+      "price": 59.99,
+      "category": "Electronics",
+      "stock": 120
+    },
+    {
+      "id": "007",
+      "name": "4K Monitor",
+      "description": "Ultra HD 4K monitor with a 27-inch display and HDR support.",
+      "price": 349.99,
+      "category": "Electronics",
+      "stock": 30
+    },
+    {
+      "id": "008",
+      "name": "Wireless Charger",
+      "description": "Fast-charging wireless charger for smartphones and tablets.",
+      "price": 19.99,
+      "category": "Electronics",
+      "stock": 250
+    },
+    {
+      "id": "009",
+      "name": "Standing Desk",
+      "description": "Adjustable standing desk for ergonomic workspace setup.",
+      "price": 249.99,
+      "category": "Furniture",
+      "stock": 15
+    },
+    {
+      "id": "010",
+      "name": "Fitness Tracker",
+      "description": "Waterproof fitness tracker with heart rate monitor and GPS.",
+      "price": 99.99,
+      "category": "Fitness",
+      "stock": 180
+    },
+    {
+      "id": "011",
+      "name": "Smart Light Bulb",
+      "description": "Wi-Fi enabled smart bulb with adjustable brightness and color.",
+      "price": 14.99,
+      "category": "Home & Kitchen",
+      "stock": 300
+    },
+    {
+      "id": "012",
+      "name": "Noise-Cancelling Earbuds",
+      "description": "In-ear wireless earbuds with active noise cancellation.",
+      "price": 129.99,
+      "category": "Electronics",
+      "stock": 95
+    },
+    {
+      "id": "013",
+      "name": "Electric Kettle",
+      "description": "Stainless steel electric kettle with auto shut-off feature.",
+      "price": 39.99,
+      "category": "Home & Kitchen",
+      "stock": 70
+    },
+    {
+      "id": "014",
+      "name": "Resistance Bands Set",
+      "description": "Set of 5 resistance bands for strength training and yoga.",
+      "price": 24.99,
+      "category": "Fitness",
+      "stock": 210
+    },
+    {
+      "id": "015",
+      "name": "Smartwatch",
+      "description": "Water-resistant smartwatch with multiple fitness tracking features.",
+      "price": 199.99,
+      "category": "Electronics",
+      "stock": 80
+    }
+  ]
+}
