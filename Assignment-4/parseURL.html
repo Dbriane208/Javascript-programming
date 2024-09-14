@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parse URL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+
+        input {
+            padding: 8px;
+            width: 300px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 8px 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>URL Parser</h2>
+    <label for="urlInput">Enter a URL:</label>
+    <br>
+    <input type="text" id="urlInput" value="https://www.example.com:8080/path?name=John#section1">
+    <br>
+    <button onclick="parseAndDisplayURL()">Parse URL</button>
+
+    <div id="result"></div>
+
+    <script>
+        function parseURL(url) {
+            var parser = document.createElement('a');
+            parser.href = url;
+            return {
+                protocol: parser.protocol,
+                host: parser.host,
+                hostname: parser.hostname,
+                port: parser.port,
+                pathname: parser.pathname,
+                search: parser.search,
+                hash: parser.hash
+            };
+        }
+
+        function parseAndDisplayURL() {
+            var url = document.getElementById('urlInput').value;
+            var parsedURL = parseURL(url);
+
+            var resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <h3>Parsed URL Components:</h3>
+                <p><strong>Protocol:</strong> ${parsedURL.protocol}</p>
+                <p><strong>Host:</strong> ${parsedURL.host}</p>
+                <p><strong>Hostname:</strong> ${parsedURL.hostname}</p>
+                <p><strong>Port:</strong> ${parsedURL.port || 'None'}</p>
+                <p><strong>Pathname:</strong> ${parsedURL.pathname}</p>
+                <p><strong>Search (Query Parameters):</strong> ${parsedURL.search || 'None'}</p>
+                <p><strong>Hash:</strong> ${parsedURL.hash || 'None'}</p>
+            `;
+        }
+    </script>
+
+</body>
+</html>

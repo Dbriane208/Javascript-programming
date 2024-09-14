@@ -1,32 +1,9 @@
 // Edge cases
-const assert = {
-    assertEqual(actual, expected, message) {
-      if (actual !== expected) {
-        throw new Error(message || `Expected ${expected}, but got ${actual}`);
-      }
-    },
-    assertNotEqual(actual, expected, message) {
-      if (actual === expected) {
-        throw new Error(message || `Expected ${actual} to be different from ${expected}`);
-      }
-    },
-    assertTrue(value, message) {
-      if (!value) {
-        throw new Error(message || `Expected ${value} to be truthy`);
-      }
-    },
-    assertFalse(value, message) {
-      if (value) {
-        throw new Error(message || `Expected ${value} to be falsy`);
-      }
-    },
-    assertContains(array, item, message) {
-      if (!array.includes(item)) {
-        throw new Error(message || `Expected ${array} to contain ${item}`);
-      }
-    }
-  };
-  
+/**
+ The assert object contains several assertion functions used to check if the test conditions
+ are true or false
+ */
+  const assert = require('./Assertions')
   // Test Runner
   class TestRunner {
     constructor() {
@@ -149,7 +126,7 @@ const assert = {
     runner.addHook('afterAll', hookFunction);
   }
   
-  // Example usage
+  // Tests
   describe('Math Operations', () => {
     test('Addition', async () => {
       assert.assertEqual(1 + 1, 2, 'Addition should work correctly');
@@ -166,6 +143,13 @@ const assert = {
       assert.assertContains(arr, 5, 'Array should contain the item');
     });
   });
+
+
+  describe('Equal numbers', () => {
+    test('Compare two numbets', async () => {
+      assert.assertTrue(3 === 2,false,'Test should be False')
+    })
+  })
   
   beforeAll(() => {
     console.log('Setting up test environment...');
