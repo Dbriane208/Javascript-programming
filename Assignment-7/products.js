@@ -101,7 +101,7 @@ const addProductToCart = function (product) {
 // Function to fetch data and initialize the page with async/await
 const fetchData = async () => {
     try {
-        const res = await fetch("https://run.mocky.io/v3/cc2a23ed-67af-453a-89e7-a48bf18405f3");
+        const res = await fetch("http://localhost:3000/data");
         const data = await res.json();
         events = data;
         displayContent(events); // Call the function to display the events initially
