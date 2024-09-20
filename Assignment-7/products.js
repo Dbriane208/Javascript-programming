@@ -1,195 +1,151 @@
-let events = []; // will store the items to be filtered.
-let cartProducts = []; // will store items in the cart
+let listProductHTML = document.querySelector('.listProduct');
+let listCartHTML = document.querySelector('.listCart');
+let iconCart = document.querySelector('.icon-cart');
+let iconCartSpan = document.querySelector('.icon-cart span');
+let body = document.querySelector('body');
+let closeCart = document.querySelector('.close');
+let products = [];
+let cart = [];
 
-// Function to display events
-const displayContent = function (eventsToDisplay) {
-    const container = document.getElementById("container");
-    container.innerHTML = "";
 
-    eventsToDisplay.forEach(event => {
-        const card = document.createElement("div");
-        card.className = "main";
-        container.appendChild(card);
+iconCart.addEventListener('click', () => {
+    body.classList.toggle('showCart');
+})
+closeCart.addEventListener('click', () => {
+    body.classList.toggle('showCart');
+})
 
-        const img = document.createElement('img');
-        img.src = event.imageUrl;
-        card.appendChild(img);
+    const addDataToHTML = () => {
+    // remove datas default from HTML
 
-        const info = document.createElement('div');
-        info.className = "info";
-        card.appendChild(info);
-
-        const title = document.createElement('h3');
-        title.textContent = event.title;
-        info.appendChild(title);
-
-        const date = document.createElement('p');
-        date.textContent = event.date;
-        info.appendChild(date);
-
-        const company = document.createElement('p');
-        company.textContent = event.company;
-        info.appendChild(company);
-
-        const price = document.createElement('p');
-        price.textContent = `Ksh ${event.price}`;
-        info.appendChild(price);
-
-        const button = document.createElement('button');
-        button.textContent = 'Add to Cart';
-        button.className = 'addProduct';
-        info.appendChild(button);
-
-        button.addEventListener('click', () => {
-            addProductToCart(event); // Call the function to add the product to the cart
-        });
-    });
-};
-
-// Function to add products to the cart
-const addProductToCart = function (product) {
-    const cartContainer = document.getElementById('cartContainer');
-
-    // Check if the product already exists in the cart
-    const existingProductIndex = cartProducts.findIndex(item => item.id === product.id);
-    console.log(existingProductIndex);
-
-    if (existingProductIndex !== -1) {
-        // Remove the existing product from the cart array
-        cartProducts.splice(existingProductIndex, 1);
+        // add new datas
+        if(products.length > 0) // if has data
+        {
+            products.forEach(product => {
+                let newProduct = document.createElement('div');
+                newProduct.dataset.id = product.id;
+                newProduct.classList.add('item');
+                newProduct.innerHTML = 
+                `
+                <img src="${product.imageUrl}" alt="">
+                <h2>${product.title}</h2>
+                <h2>${product.date}</h2>
+                <h2>${product.location}</h2>
+                <h2>${product.company}</h2>
+                <div class="price">$${product.price}</div>
+                <button class="addCart">Add To Cart</button>
+                `;
+                listProductHTML.appendChild(newProduct);
+            });
+        }
     }
-
-    // Add the product to the cart array
-    cartProducts.push(product);
-    console.log(cartProducts);
-
-    // Clear the cart container and re-render items
-    cartContainer.innerHTML = '';
-    cartProducts.forEach(item => {
-        const cartItem = document.createElement('div');
-        cartItem.className = 'cart-item';
-
-        const img = document.createElement('img');
-        img.src = item.imageUrl;
-        cartItem.appendChild(img);
-
-        const info = document.createElement('div');
-        info.className = "info-cart";
-        cartItem.appendChild(info);
-
-        const title = document.createElement('h4');
-        title.textContent = item.title;
-        info.appendChild(title);
-
-        const date = document.createElement('p');
-        date.textContent = item.date;
-        info.appendChild(date);
-
-        const company = document.createElement('p');
-        company.textContent = item.company;
-        info.appendChild(company);
-
-        const price = document.createElement('p');
-        price.textContent = `Ksh ${item.price}`;
-        info.appendChild(price);
-
-        // Append the new cart item to the cart container
-        cartContainer.appendChild(cartItem);
-    });
-};
-
-// Function to fetch data and initialize the page with async/await
-const fetchData = async () => {
-    try {
-        const res = await fetch("http://localhost:3000/data");
-        const data = await res.json();
-        events = data;
-        displayContent(events); // Call the function to display the events initially
-    } catch (error) {
-        console.error('Error fetching data:', error);
+    listProductHTML.addEventListener('click', (event) => {
+        let positionClick = event.target;
+        if(positionClick.classList.contains('addCart')){
+            let id_product = positionClick.parentElement.dataset.id;
+            addToCart(id_product);
+        }
+    })
+const addToCart = (product_id) => {
+    let positionThisProductInCart = cart.findIndex((value) => value.product_id == product_id);
+    if(cart.length <= 0){
+        cart = [{
+            product_id: product_id,
+            quantity: 1
+        }];
+    }else if(positionThisProductInCart < 0){
+        cart.push({
+            product_id: product_id,
+            quantity: 1
+        });
+    }else{
+        cart[positionThisProductInCart].quantity = cart[positionThisProductInCart].quantity + 1;
     }
-};
+    addCartToHTML();
+    addCartToMemory();
+}
+const addCartToMemory = () => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+const addCartToHTML = () => {
+    listCartHTML.innerHTML = '';
+    let totalQuantity = 0;
+    if(cart.length > 0){
+        cart.forEach(item => {
+            totalQuantity = totalQuantity +  item.quantity;
+            let newItem = document.createElement('div');
+            newItem.classList.add('item');
+            newItem.dataset.id = item.product_id;
 
-// Function to delete products from the cart
-const deleteProductFromCart = function (productId) {
-    cartProducts = cartProducts.filter(item => item.id !== productId);
-    updateCartUI();
-};
-
-// Function to update the cart UI
-const updateCartUI = function () {
-    const cartContainer = document.getElementById('cartContainer');
-    cartContainer.innerHTML = "";
-
-    cartProducts.forEach(product => {
-        const cartItem = document.createElement('div');
-        cartItem.className = 'cart-item';
-
-        const img = document.createElement('img');
-        img.src = product.imageUrl;
-        cartItem.appendChild(img);
-
-        const info = document.createElement('div');
-        info.className = "info-cart";
-        cartItem.appendChild(info);
-
-        const title = document.createElement('h4');
-        title.textContent = product.title;
-        info.appendChild(title);
-
-        const date = document.createElement('p');
-        date.textContent = product.date;
-        info.appendChild(date);
-
-        const company = document.createElement('p');
-        company.textContent = product.company;
-        info.appendChild(company);
-
-        const price = document.createElement('p');
-        price.textContent = `Ksh ${product.price}`;
-        info.appendChild(price);
-
-        const quantity = document.createElement('p');
-        quantity.textContent = `Quantity: ${product.quantity}`;
-        info.appendChild(quantity);
-
-        const increaseButton = document.createElement('button');
-        increaseButton.textContent = 'Increase';
-        increaseButton.addEventListener('click', () => {
-            increaseProductQuantity(product.id);
-        });
-        info.appendChild(increaseButton);
-
-        const decreaseButton = document.createElement('button');
-        decreaseButton.textContent = 'Decrease';
-        decreaseButton.addEventListener('click', () => {
-            reduceProductQuantity(product.id);
-        });
-        info.appendChild(decreaseButton);
-
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Remove';
-        deleteButton.addEventListener('click', () => {
-            deleteProductFromCart(product.id);
-        });
-        info.appendChild(deleteButton);
-    });
-};
-
-// Call the fetchData function when the page loads
-fetchData();
-
-// Filter functionality
-document.getElementById('priceFilter').addEventListener('change', () => {
-    const priceFilter = document.getElementById('priceFilter').value;
-
-    let filteredEvents = events;
-
-    if (priceFilter === 'low') {
-        filteredEvents = events.filter(event => event.price <= 50);
-    } else if (priceFilter === 'high') {
-        filteredEvents = events.filter(event => event.price > 50);
+            let positionProduct = products.findIndex((value) => value.id == item.product_id);
+            let info = products[positionProduct];
+            listCartHTML.appendChild(newItem);
+            newItem.innerHTML = `
+            <div class="image">
+                    <img src="${info.imageUrl}">
+                </div>
+                <div class="name">
+                ${info.title}
+                </div>
+                <div class="totalPrice">$${info.price * item.quantity}</div>
+                <div class="quantity">
+                    <span class="minus"><</span>
+                    <span>${item.quantity}</span>
+                    <span class="plus">></span>
+                </div>
+            `;
+        })
     }
+    iconCartSpan.innerText = totalQuantity;
+}
 
-    displayContent(filteredEvents);
-});
+listCartHTML.addEventListener('click', (event) => {
+    let positionClick = event.target;
+    if(positionClick.classList.contains('minus') || positionClick.classList.contains('plus')){
+        let product_id = positionClick.parentElement.parentElement.dataset.id;
+        let type = 'minus';
+        if(positionClick.classList.contains('plus')){
+            type = 'plus';
+        }
+        changeQuantityCart(product_id, type);
+    }
+})
+const changeQuantityCart = (product_id, type) => {
+    let positionItemInCart = cart.findIndex((value) => value.product_id == product_id);
+    if(positionItemInCart >= 0){
+        let info = cart[positionItemInCart];
+        switch (type) {
+            case 'plus':
+                cart[positionItemInCart].quantity = cart[positionItemInCart].quantity + 1;
+                break;
+        
+            default:
+                let changeQuantity = cart[positionItemInCart].quantity - 1;
+                if (changeQuantity > 0) {
+                    cart[positionItemInCart].quantity = changeQuantity;
+                }else{
+                    cart.splice(positionItemInCart, 1);
+                }
+                break;
+        }
+    }
+    addCartToHTML();
+    addCartToMemory();
+}
+
+const initApp = () => {
+    // get data product
+    fetch('http://localhost:3000/data')
+    .then(response => response.json())
+    .then(data => {
+        products = data;
+        addDataToHTML();
+
+        // get data cart from memory
+        if(localStorage.getItem('cart')){
+            cart = JSON.parse(localStorage.getItem('cart'));
+            addCartToHTML();
+        }
+    })
+}
+initApp();
