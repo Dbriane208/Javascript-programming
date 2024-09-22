@@ -1,14 +1,22 @@
 let events = [];
 let cartProducts = [];
 
-// Fetch event data
-fetch("http://localhost:3000/data")
-  .then((res) => res.json())
-  .then((data) => {
+// Fetch event data using async/await
+const fetchEventData = async () => {
+  try {
+    const res = await fetch("http://localhost:3000/data"); // Await fetch response
+    const data = await res.json(); // Await for the response to be converted to JSON
     console.log(data);
     events = data; // Store fetched data in events
     displayEvents(events); // Display events initially
-  });
+  } catch (error) {
+    console.error("Error fetching data:", error); // Handle any errors that occur during fetch
+  }
+};
+
+// Call the function to fetch and display events
+fetchEventData();
+
 
 function displayEvents(events) {
   const container = document.getElementById("container");
@@ -168,6 +176,8 @@ const refreshCart = function () {
 
       const sub = document.createElement("button");
       sub.textContent = '-';
+      sub.style.borderRadius = "15px";
+      sub.style.margin = "5px";
       sub.className = 'btn';
       sub.addEventListener('click', () => {
           if (item.quantity > 1) {
@@ -185,6 +195,8 @@ const refreshCart = function () {
 
       const add = document.createElement("button");
       add.textContent = '+';
+      add.style.borderRadius = "15px";
+      add.style.margin = "5px";
       add.className = 'btn';
       add.addEventListener('click', () => {
           item.quantity += 1;
@@ -212,6 +224,7 @@ const refreshCart = function () {
 // Function to calculate and display the total price
 const updateTotalPrice = function () {
   const totalPriceDiv = document.getElementById('totalPriceDiv'); // Div to display total price
+
   let totalPrice = 0;
 
   cartProducts.forEach(item => {
@@ -226,6 +239,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const cartDiv = document.getElementById('cartDiv');
   const totalPriceDiv = document.createElement('div');
   totalPriceDiv.id = 'totalPriceDiv';
+
   totalPriceDiv.textContent = 'Total Price: Ksh 0';
+  totalPriceDiv.style.backgroundColor = "rgb(68, 216, 226)";
+  totalPriceDiv.style.height ="70px"
+  totalPriceDiv.style.alignContent ="center";
+  totalPriceDiv.style.fontWeight ="bold";
+  totalPriceDiv.style.color = "white";
   cartDiv.parentElement.appendChild(totalPriceDiv); 
 });

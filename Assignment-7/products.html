@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Shopping List</title>
     <link rel="stylesheet" href="products.css">
 </head>
 <body>
 <div class="main-container">
-    <h1 style="margin-top: 80px;">Product Page</h1>
+    <h1 style="margin-top: 80px;">Product List</h1>
     <label >Filter by Price:</label>
     <select id="priceFilter">
         <option value="all">All</option>
@@ -16,20 +16,20 @@
         <option value="high">Above 25</option>
     </select>
     <div class="sort-options">
-        <button id="sort-price-asc">Sort by Price (Asc)</button>
-        <button id="sort-price-desc">Sort by Price (Desc)</button>
-        <button id="sort-date-asc">Sort by Date (Asc)</button>
-        <button id="sort-date-desc">Sort by Date (Desc)</button>
+        <button id="sort-price-asc">Filter by Price (Asc)</button>
+        <button id="sort-price-desc">Filter by Price (Desc)</button>
+        <button id="sort-date-asc">Filter by Date (Asc)</button>
+        <button id="sort-date-desc">Filter by Date (Desc)</button>
     </div>
     <div style="display: flex; width: 100%;align-items: center;justify-content: center;">
         <div class="container" id="container">
-
+            <!-- Data from the API is dynamically added here -->
         </div>
         <div style="background-color:lightgray; width: 20%;">
-            <h2>Cart Items</h2>
+            <h2 style="background-color: rgb(68, 216, 226); height: 70px; align-content: center; color: white;">Cart Items</h2>
             <div class="cartDiv" id="cartDiv">
             </div>
-        </div>
+        </div> 
     </div>
 </div>
 </body>
